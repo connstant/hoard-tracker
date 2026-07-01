@@ -66,7 +66,7 @@ export default function DragonCard({
                   type="checkbox"
                   checked={record.owned}
                   onChange={(e) => onChange({ owned: e.target.checked })}
-                  className="h-4 w-4 rounded border-slate-600/60 bg-slate-950/60 accent-blue-500"
+                  className="h-4 w-4 rounded border-slate-600/60 bg-slate-950/60 accent-white"
                 />
                 Owned
               </label>
@@ -78,7 +78,7 @@ export default function DragonCard({
                   type="checkbox"
                   checked={record.dom}
                   onChange={(e) => onChange({ dom: e.target.checked })}
-                  className="h-4 w-4 rounded border-slate-600/60 bg-slate-950/60 accent-blue-500"
+                  className="h-4 w-4 rounded border-slate-600/60 bg-slate-950/60 accent-white"
                 />
                 Dom
               </label>
@@ -203,7 +203,7 @@ function Segmented<T extends string>({
             onClick={() => onChange(active && allowDeselect ? null : opt.value)}
             className={`flex-1 px-2 py-1.5 text-xs font-medium transition ${
               active
-                ? "bg-slate-700/70 text-white"
+                ? "bg-white text-slate-900"
                 : "bg-transparent text-slate-300 hover:text-white"
             }`}
           >
