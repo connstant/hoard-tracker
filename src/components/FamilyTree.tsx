@@ -12,7 +12,7 @@ interface FamilyTreeProps {
 export default function FamilyTree({ species, record, onChange }: FamilyTreeProps) {
   return (
     <div>
-      <p className="mb-1.5 text-xs text-slate-400">Family Tree</p>
+      <p className="mb-1.5 text-xs text-slate-300">Family Tree</p>
       <div className="flex flex-col items-center gap-1.5 rounded-lg border border-slate-700/60 bg-slate-950/30 p-2.5">
         <div className="grid w-full grid-cols-2 gap-3">
           <Side label="Maternal">
@@ -69,7 +69,7 @@ export default function FamilyTree({ species, record, onChange }: FamilyTreeProp
 function Side({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1">
-      <p className="text-center text-[9px] font-medium uppercase tracking-wide text-slate-500">
+      <p className="text-center text-[9px] font-medium uppercase tracking-wide text-slate-300">
         {label}
       </p>
       {children}
@@ -128,7 +128,7 @@ function TreeNode({
     <div className="flex min-w-0 flex-col gap-0.5">
       <span
         className={`truncate text-[9px] uppercase tracking-wide ${
-          emphasize ? "font-medium text-slate-300" : "text-slate-500"
+          emphasize ? "font-medium text-slate-200" : "text-slate-300"
         }`}
       >
         {label}

@@ -107,7 +107,7 @@ export default function DragonCard({
           />
 
           <div>
-            <div className="mb-1.5 flex items-center justify-between text-xs text-slate-400">
+            <div className="mb-1.5 flex items-center justify-between text-xs text-slate-300">
               <span>Eldering</span>
               {species.elders && (
                 <span className="flex items-center gap-1.5">
@@ -151,7 +151,7 @@ export default function DragonCard({
           </div>
 
           <div>
-            <p className="mb-1.5 text-xs text-slate-400">Skin</p>
+            <p className="mb-1.5 text-xs text-slate-300">Skin</p>
             <input
               type="text"
               value={record.skin}
