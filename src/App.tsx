@@ -4,6 +4,7 @@ import CrystalLegend from "./components/CrystalLegend";
 import AccountTabs from "./components/AccountTabs";
 import StatsBar from "./components/StatsBar";
 import DragonGrid from "./components/DragonGrid";
+import Footer from "./components/Footer";
 import { SPECIES } from "./data/species";
 import type { AppState, DragonRecord } from "./types";
 import {
@@ -117,6 +118,7 @@ export default function App() {
           ultra={stats.ultra}
         />
         <DragonGrid dragons={activeAccount.dragons} onChange={handleDragonChange} />
+        <Footer />
       </div>
     </div>
   );

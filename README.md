@@ -1,32 +1,49 @@
-# React + TypeScript + Vite
+# Dragon Hoard Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A personal hoard tracker for [Day of Dragons](https://www.dayofdragons.com/) — keeps tabs on eldering progress, breeding lines, and collection stats across multiple accounts. Everything is stored locally in your browser; there's no server or account system.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Species roster** — every trackable Day of Dragons species preloaded, grouped by type (Dragon, Drake, Wyvern, Amphithere, Elemental)
+- **Eldering tracker** — 0–100% slider per dragon with a live night crystal color preview, plus a legend showing each crystal color's percent range
+- **Ownership & purity** — mark a dragon owned, dom-spec, its gender, and purity status (None / Pure / Ultra)
+- **Family tree** — record mother, father, and all four grandparents per dragon for breeding line planning
+- **Notes** — rich text notes per dragon (bold, italic, underline, font size) for breeding plans, skin combos, reminders, etc.
+- **Skins** — free-text field for tracking which skin a dragon is wearing
+- **Multiple accounts** — add, rename, and delete accounts, each with its own independent hoard
+- **Stats bar** — live counts of owned, fully eldered, pure, and ultra pure dragons
+- **Import / export** — back up or transfer a hoard as a JSON file
+- **Local persistence** — autosaves to the browser's local storage on every change
+- **Changelog** — version history shown at the bottom of the app
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS 4
+- Tiptap (rich text notes editor)
+- Oxlint
 
-## Expanding the Oxlint configuration
+## Getting Started
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Open [http://localhost:5173](http://localhost:5173) to use the tracker.
+
+## Scripts
+
+- `npm run dev` — start the dev server
+- `npm run build` — type-check and build for production
+- `npm run lint` — run Oxlint
+- `npm run preview` — preview the production build locally
+
+## Data
+
+Hoard data lives in the browser's `localStorage` under the `dod-hoard-tracker` key. Use **Export** in the header to download a JSON backup, and **Import** to restore it or move it to another browser.
+
+## Changelog
+
+See the Changelog section at the bottom of the app, or [`src/data/changelog.ts`](src/data/changelog.ts).
