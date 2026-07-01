@@ -54,10 +54,7 @@ export default function DragonCard({
                 {species.abbr || "—"}
               </div>
               <div>
-                <p
-                  className="font-semibold leading-tight"
-                  style={{ color: species.color }}
-                >
+                <p className="font-semibold leading-tight text-white">
                   {species.name}
                 </p>
                 <p className="text-xs text-slate-500">{species.type}</p>
@@ -207,7 +204,7 @@ function Segmented<T extends string>({
             className={`flex-1 px-2 py-1.5 text-xs font-medium transition ${
               active
                 ? "bg-slate-700/70 text-white"
-                : "bg-transparent text-slate-500 hover:text-slate-300"
+                : "bg-transparent text-slate-300 hover:text-white"
             }`}
           >
             {opt.label}
