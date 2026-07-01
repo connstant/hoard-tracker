@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: #020617;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+}
+
+/* Chrome/Safari/Edge: the runnable-track must be transparent so the
+   input's own inline `background` (the progress gradient) shows through. */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: #e5e7eb;
+  cursor: pointer;
+}
+
+/* Firefox has a native fill via ::-moz-range-progress, so the track
+   itself stays a flat, unfilled color. */
+input[type="range"]::-moz-range-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: #1e293b;
+}
+
+input[type="range"]::-moz-range-progress {
+  height: 6px;
+  border-radius: 9999px;
+  background: #e5e7eb;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 9999px;
+  background: #e5e7eb;
+  cursor: pointer;
+}
+
+.notes-editor p {
+  margin: 0;
+}
+
+.notes-editor p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  color: #475569;
+  pointer-events: none;
+}
