@@ -25,12 +25,12 @@ export default function StatsBar({
       {stats.map((stat) => (
         <div
           key={stat.label}
-          className="rounded-xl border border-slate-700/60 bg-slate-900 px-4 py-3"
+          className="rounded-xl border border-slate-300 bg-white px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900"
         >
           <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
             {stat.label}
           </p>
-          <p className="mt-1 text-2xl font-bold text-white">{stat.value}</p>
+          <p className="mt-1 text-2xl font-bold text-slate-900 dark:text-white">{stat.value}</p>
         </div>
       ))}
     </div>

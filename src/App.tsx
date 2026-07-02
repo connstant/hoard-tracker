@@ -14,13 +14,20 @@ import {
   loadState,
   saveState,
 } from "./lib/storage";
+import { applyTheme, loadTheme, saveTheme, type Theme } from "./lib/theme";
 
 export default function App() {
   const [state, setState] = useState<AppState>(() => loadState());
+  const [theme, setTheme] = useState<Theme>(() => loadTheme());
 
   useEffect(() => {
     saveState(state);
   }, [state]);
+
+  useEffect(() => {
+    applyTheme(theme);
+    saveTheme(theme);
+  }, [theme]);
 
   const activeAccount = useMemo(
     () =>
@@ -98,9 +105,16 @@ export default function App() {
   }, [activeAccount]);
 
   return (
-    <div className="min-h-screen bg-slate-950 px-4 py-6 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 px-4 py-6 transition-colors sm:px-6 lg:px-8 dark:bg-slate-950">
       <div className="mx-auto flex max-w-[1600px] flex-col gap-4">
-        <Header onExport={() => exportState(state)} onImport={handleImport} />
+        <Header
+          theme={theme}
+          onToggleTheme={() =>
+            setTheme((prev) => (prev === "dark" ? "light" : "dark"))
+          }
+          onExport={() => exportState(state)}
+          onImport={handleImport}
+        />
         <CrystalLegend />
         <AccountTabs
           accounts={state.accounts}

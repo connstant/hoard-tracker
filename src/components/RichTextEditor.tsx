@@ -75,7 +75,7 @@ export default function RichTextEditor({
       <Toolbar editor={editor} />
       <EditorContent
         editor={editor}
-        className="flex-auto min-h-[100px] rounded-b-lg border border-t-0 border-slate-700/60 bg-slate-950/60 px-3 py-2 text-xs text-slate-200"
+        className="flex-auto min-h-[100px] rounded-b-lg border border-t-0 border-slate-300 bg-white px-3 py-2 text-xs text-slate-700 dark:border-slate-700/60 dark:bg-slate-950/60 dark:text-slate-200"
       />
     </div>
   );
@@ -93,7 +93,7 @@ function Toolbar({ editor }: { editor: Editor }) {
   });
 
   return (
-    <div className="flex items-center gap-1 rounded-t-lg border border-slate-700/60 bg-slate-800/50 px-2 py-1.5">
+    <div className="flex items-center gap-1 rounded-t-lg border border-slate-300 bg-slate-100 px-2 py-1.5 dark:border-slate-700/60 dark:bg-slate-800/50">
       <ToolbarButton
         active={state.bold}
         onClick={() => editor.chain().focus().toggleBold().run()}
@@ -115,7 +115,7 @@ function Toolbar({ editor }: { editor: Editor }) {
       >
         <span className="underline">U</span>
       </ToolbarButton>
-      <div className="mx-1 h-4 w-px bg-slate-700" />
+      <div className="mx-1 h-4 w-px bg-slate-300 dark:bg-slate-700" />
       <select
         value={state.fontSize}
         onChange={(e) => {
@@ -123,7 +123,7 @@ function Toolbar({ editor }: { editor: Editor }) {
           if (size) editor.chain().focus().setFontSize(size).run();
           else editor.chain().focus().unsetFontSize().run();
         }}
-        className="rounded border border-slate-700/60 bg-slate-950/60 px-1 py-0.5 text-[11px] text-slate-300 outline-none"
+        className="rounded border border-slate-300 bg-white px-1 py-0.5 text-[11px] text-slate-600 outline-none dark:border-slate-700/60 dark:bg-slate-950/60 dark:text-slate-300"
       >
         {FONT_SIZES.map((size) => (
           <option key={size.label} value={size.value}>
@@ -154,8 +154,8 @@ function ToolbarButton({
       title={label}
       className={`flex h-6 w-6 items-center justify-center rounded text-xs transition ${
         active
-          ? "bg-slate-600 text-white"
-          : "text-slate-400 hover:bg-slate-700/60 hover:text-slate-200"
+          ? "bg-slate-300 text-slate-900 dark:bg-slate-600 dark:text-white"
+          : "text-slate-500 hover:bg-slate-200 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-700/60 dark:hover:text-slate-200"
       }`}
     >
       {children}

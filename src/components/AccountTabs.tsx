@@ -34,7 +34,7 @@ export default function AccountTabs({
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-2 border-b border-slate-700/60 pb-3">
+    <div className="flex flex-wrap items-center gap-2 border-b border-slate-300 pb-3 dark:border-slate-700/60">
       {accounts.map((account) => {
         const isActive = account.id === activeAccountId;
         const isEditing = editingId === account.id;
@@ -43,8 +43,8 @@ export default function AccountTabs({
             key={account.id}
             className={`group flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition ${
               isActive
-                ? "bg-slate-700/70 text-white"
-                : "text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"
+                ? "bg-slate-300/70 text-slate-900 dark:bg-slate-700/70 dark:text-white"
+                : "text-slate-500 hover:bg-slate-200 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800/60 dark:hover:text-slate-200"
             }`}
           >
             {isEditing ? (
@@ -57,7 +57,7 @@ export default function AccountTabs({
                   if (e.key === "Enter") commitEdit();
                   if (e.key === "Escape") setEditingId(null);
                 }}
-                className="w-32 rounded border border-slate-600/60 bg-slate-950/60 px-1.5 py-0.5 text-sm text-white outline-none"
+                className="w-32 rounded border border-slate-400 bg-white px-1.5 py-0.5 text-sm text-slate-900 outline-none dark:border-slate-600/60 dark:bg-slate-950/60 dark:text-white"
               />
             ) : (
               <button onClick={() => onSelect(account.id)}>
@@ -68,7 +68,7 @@ export default function AccountTabs({
               <button
                 onClick={() => startEditing(account)}
                 aria-label="Rename account"
-                className="text-slate-500 opacity-0 transition group-hover:opacity-100 hover:text-slate-200"
+                className="text-slate-500 opacity-0 transition group-hover:opacity-100 hover:text-slate-700 dark:hover:text-slate-200"
               >
                 ✎
               </button>
@@ -87,7 +87,7 @@ export default function AccountTabs({
       })}
       <button
         onClick={onAdd}
-        className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-400 transition hover:bg-slate-800/60 hover:text-slate-200"
+        className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-500 transition hover:bg-slate-200 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800/60 dark:hover:text-slate-200"
       >
         <span className="text-base leading-none">+</span> Add account
       </button>

@@ -8,6 +8,15 @@ export interface ChangelogEntry {
 // fix ships — it renders automatically in the Footer.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: "1.1.0",
+    date: "2026-07-02",
+    changes: [
+      "Light mode toggle in the header, alongside the original dark theme",
+      "Changelog is now collapsed by default; click \"View Changelog\" to expand it",
+      "Eldering percent field is wider and no longer shows a stuck leading zero while typing",
+    ],
+  },
+  {
     version: "1.0.0",
     date: "2026-07-01",
     changes: [

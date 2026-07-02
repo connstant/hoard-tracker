@@ -9,24 +9,16 @@ interface FamilyTreeProps {
 // Two columns (maternal / paternal) merging down through parents into the
 // dragon itself. Only ever needs two columns of width, so it keeps working
 // even in the narrow column notes-on-the-side leaves for everything else.
-export default function FamilyTree({ species, record, onChange }: FamilyTreeProps) {
+export default function FamilyTree({
+  species,
+  record,
+  onChange,
+}: FamilyTreeProps) {
   return (
     <div>
-      <p className="mb-1.5 text-xs text-slate-300">Family Tree</p>
-      <div className="flex flex-col items-center gap-1.5 rounded-lg border border-slate-700/60 bg-slate-950/30 p-2.5">
+      <p className="mb-1.5 text-xs text-slate-600 dark:text-slate-300">Family Tree</p>
+      <div className="flex flex-col items-center gap-1.5 rounded-lg border border-slate-300 bg-slate-100/60 p-2.5 dark:border-slate-700/60 dark:bg-slate-950/30">
         <div className="grid w-full grid-cols-2 gap-3">
-          <Side label="Maternal">
-            <TreeNode
-              label="Grandmother"
-              value={record.maternalGrandmother}
-              onChange={(v) => onChange({ maternalGrandmother: v })}
-            />
-            <TreeNode
-              label="Grandfather"
-              value={record.maternalGrandfather}
-              onChange={(v) => onChange({ maternalGrandfather: v })}
-            />
-          </Side>
           <Side label="Paternal">
             <TreeNode
               label="Grandmother"
@@ -39,21 +31,33 @@ export default function FamilyTree({ species, record, onChange }: FamilyTreeProp
               onChange={(v) => onChange({ paternalGrandfather: v })}
             />
           </Side>
+          <Side label="Maternal">
+            <TreeNode
+              label="Grandmother"
+              value={record.maternalGrandmother}
+              onChange={(v) => onChange({ maternalGrandmother: v })}
+            />
+            <TreeNode
+              label="Grandfather"
+              value={record.maternalGrandfather}
+              onChange={(v) => onChange({ maternalGrandfather: v })}
+            />
+          </Side>
         </div>
 
         <ParallelDrop />
 
         <div className="grid w-full grid-cols-2 gap-3">
           <TreeNode
-            label="Mother"
-            value={record.mother}
-            onChange={(v) => onChange({ mother: v })}
-            emphasize
-          />
-          <TreeNode
             label="Father"
             value={record.father}
             onChange={(v) => onChange({ father: v })}
+            emphasize
+          />
+          <TreeNode
+            label="Mother"
+            value={record.mother}
+            onChange={(v) => onChange({ mother: v })}
             emphasize
           />
         </div>
@@ -66,10 +70,16 @@ export default function FamilyTree({ species, record, onChange }: FamilyTreeProp
   );
 }
 
-function Side({ label, children }: { label: string; children: React.ReactNode }) {
+function Side({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1">
-      <p className="text-center text-[9px] font-medium uppercase tracking-wide text-slate-300">
+      <p className="text-center text-[9px] font-medium uppercase tracking-wide text-slate-600 dark:text-slate-300">
         {label}
       </p>
       {children}
@@ -81,8 +91,8 @@ function Side({ label, children }: { label: string; children: React.ReactNode })
 function ParallelDrop() {
   return (
     <div className="relative h-3 w-full">
-      <div className="absolute left-1/4 top-0 h-full w-px -translate-x-1/2 bg-slate-600" />
-      <div className="absolute left-3/4 top-0 h-full w-px -translate-x-1/2 bg-slate-600" />
+      <div className="absolute left-1/4 top-0 h-full w-px -translate-x-1/2 bg-slate-400 dark:bg-slate-600" />
+      <div className="absolute left-3/4 top-0 h-full w-px -translate-x-1/2 bg-slate-400 dark:bg-slate-600" />
     </div>
   );
 }
@@ -91,8 +101,8 @@ function ParallelDrop() {
 function MergeDrop() {
   return (
     <div className="relative h-3 w-full">
-      <div className="absolute left-1/4 right-1/4 top-0 h-px bg-slate-600" />
-      <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-slate-600" />
+      <div className="absolute left-1/4 right-1/4 top-0 h-px bg-slate-400 dark:bg-slate-600" />
+      <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-slate-400 dark:bg-slate-600" />
     </div>
   );
 }
@@ -128,7 +138,9 @@ function TreeNode({
     <div className="flex min-w-0 flex-col gap-0.5">
       <span
         className={`truncate text-[9px] uppercase tracking-wide ${
-          emphasize ? "font-medium text-slate-200" : "text-slate-300"
+          emphasize
+            ? "font-medium text-slate-700 dark:text-slate-200"
+            : "text-slate-600 dark:text-slate-300"
         }`}
       >
         {label}
@@ -138,7 +150,7 @@ function TreeNode({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="—"
-        className="w-full min-w-0 rounded border border-slate-700/60 bg-slate-950/60 px-1.5 py-1 text-xs text-slate-200 outline-none placeholder:text-slate-600"
+        className="w-full min-w-0 rounded border border-slate-300 bg-white px-1.5 py-1 text-xs text-slate-700 outline-none placeholder:text-slate-400 dark:border-slate-700/60 dark:bg-slate-950/60 dark:text-slate-200 dark:placeholder:text-slate-600"
       />
     </div>
   );
