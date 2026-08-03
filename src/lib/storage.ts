@@ -5,7 +5,6 @@ const STORAGE_KEY = "dod-hoard-tracker";
 
 export function emptyDragonRecord(): DragonRecord {
   return {
-    owned: false,
     dom: false,
     gender: "unset",
     status: "none",

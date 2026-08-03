@@ -1,27 +1,22 @@
 interface StatsBarProps {
-  owned: number;
-  total: number;
   fullyEldered: number;
   pure: number;
   ultra: number;
 }
 
 export default function StatsBar({
-  owned,
-  total,
   fullyEldered,
   pure,
   ultra,
 }: StatsBarProps) {
   const stats = [
-    { label: "Owned", value: `${owned} / ${total}` },
     { label: "Fully Eldered", value: fullyEldered },
     { label: "Pure", value: pure },
     { label: "Ultra Pure", value: ultra },
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
       {stats.map((stat) => (
         <div
           key={stat.label}

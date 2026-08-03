@@ -94,14 +94,13 @@ export default function App() {
 
   const stats = useMemo(() => {
     const records = Object.entries(activeAccount.dragons);
-    const owned = records.filter(([, r]) => r.owned).length;
     const fullyEldered = records.filter(([speciesId, r]) => {
       const species = SPECIES.find((s) => s.id === speciesId);
-      return r.owned && species?.elders && r.eldering >= 100;
+      return species?.elders && r.eldering >= 100;
     }).length;
-    const pure = records.filter(([, r]) => r.owned && r.status === "pure").length;
-    const ultra = records.filter(([, r]) => r.owned && r.status === "ultra").length;
-    return { owned, fullyEldered, pure, ultra };
+    const pure = records.filter(([, r]) => r.status === "pure").length;
+    const ultra = records.filter(([, r]) => r.status === "ultra").length;
+    return { fullyEldered, pure, ultra };
   }, [activeAccount]);
 
   return (
@@ -125,8 +124,6 @@ export default function App() {
           onDelete={handleDeleteAccount}
         />
         <StatsBar
-          owned={stats.owned}
-          total={SPECIES.length}
           fullyEldered={stats.fullyEldered}
           pure={stats.pure}
           ultra={stats.ultra}

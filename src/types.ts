@@ -25,10 +25,13 @@ export interface Species {
   type: SpeciesType;
   elders: boolean;
   color: string;
+  // Average number of ticks (progress gained from any source: login,
+  // crystal, etc.) to go from 0% to 100% eldering, per
+  // https://tinyurl.com/DoD-Eldering. Omitted for species that don't elder.
+  ticksToElder?: number;
 }
 
 export interface DragonRecord {
-  owned: boolean;
   dom: boolean;
   gender: Gender;
   status: PurityStatus;

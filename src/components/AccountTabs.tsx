@@ -20,6 +20,9 @@ export default function AccountTabs({
 }: AccountTabsProps) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draftName, setDraftName] = useState("");
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
+
+  const pendingDeleteAccount = accounts.find((a) => a.id === pendingDeleteId);
 
   function startEditing(account: Account) {
     setEditingId(account.id);
@@ -75,7 +78,7 @@ export default function AccountTabs({
             )}
             {accounts.length > 1 && !isEditing && (
               <button
-                onClick={() => onDelete(account.id)}
+                onClick={() => setPendingDeleteId(account.id)}
                 aria-label="Delete account"
                 className="text-slate-500 opacity-0 transition group-hover:opacity-100 hover:text-red-400"
               >
@@ -91,6 +94,43 @@ export default function AccountTabs({
       >
         <span className="text-base leading-none">+</span> Add account
       </button>
+
+      {pendingDeleteAccount && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4"
+          onClick={() => setPendingDeleteId(null)}
+        >
+          <div
+            className="w-full max-w-sm rounded-xl bg-white p-5 shadow-xl dark:bg-slate-800"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-base font-semibold text-slate-900 dark:text-white">
+              Delete "{pendingDeleteAccount.name}"?
+            </h2>
+            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+              This permanently deletes this account and all of its dragon
+              progress. This can't be undone.
+            </p>
+            <div className="mt-4 flex justify-end gap-2">
+              <button
+                onClick={() => setPendingDeleteId(null)}
+                className="rounded-lg border border-slate-300 bg-slate-100 px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:bg-slate-200 dark:border-slate-700/60 dark:bg-slate-800/50 dark:text-slate-200 dark:hover:bg-slate-700/60"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  onDelete(pendingDeleteAccount.id);
+                  setPendingDeleteId(null);
+                }}
+                className="rounded-lg bg-red-500 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-red-600"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -32,6 +32,12 @@ export default function DragonCard({
     ? CRYSTAL_HEX[crystalForPercent(record.eldering)]
     : undefined;
 
+  // Ticks needed scales with remaining progress, since ticksToElder is the
+  // average total from 0% to 100%.
+  const ticksRemaining = species.ticksToElder
+    ? Math.ceil((species.ticksToElder * (100 - record.eldering)) / 100)
+    : null;
+
   // While the user is typing, the input shows its own raw text so a leading
   // "0" can be stripped as soon as another digit follows it instead of
   // fighting the number input's value-vs-display quirks. Once the field
@@ -41,13 +47,7 @@ export default function DragonCard({
 
   return (
     <div className="@container">
-      <div
-        className={`flex flex-col gap-3 rounded-xl border bg-white p-3 transition @xl:flex-row dark:bg-slate-900 ${
-          record.owned
-            ? "border-slate-400 dark:border-slate-600/60"
-            : "border-slate-200 opacity-70 dark:border-slate-800/60"
-        }`}
-      >
+      <div className="flex flex-col gap-3 rounded-xl border border-slate-400 bg-white p-3 transition @xl:flex-row dark:border-slate-600/60 dark:bg-slate-900">
         <div className="flex flex-col gap-3 @xl:w-[45%]">
           <div className="flex items-start justify-between gap-2">
             <div className="flex items-center gap-3">
@@ -69,15 +69,6 @@ export default function DragonCard({
               </div>
             </div>
             <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
-              <label className="flex cursor-pointer items-center gap-1.5">
-                <input
-                  type="checkbox"
-                  checked={record.owned}
-                  onChange={(e) => onChange({ owned: e.target.checked })}
-                  className="h-4 w-4 rounded border-slate-400 bg-slate-100 accent-slate-700 dark:border-slate-600/60 dark:bg-slate-950/60 dark:accent-white"
-                />
-                Owned
-              </label>
               <label
                 className="flex cursor-pointer items-center gap-1.5"
                 title="Dom talent spec"
@@ -149,17 +140,26 @@ export default function DragonCard({
               )}
             </div>
             {species.elders ? (
-              <input
-                type="range"
-                min={0}
-                max={100}
-                value={record.eldering}
-                onChange={(e) => onChange({ eldering: Number(e.target.value) })}
-                className="w-full"
-                style={{
-                  background: `linear-gradient(to right, var(--range-fill) ${record.eldering}%, var(--range-track) ${record.eldering}%)`,
-                }}
-              />
+              <>
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={record.eldering}
+                  onChange={(e) => onChange({ eldering: Number(e.target.value) })}
+                  className="w-full"
+                  style={{
+                    background: `linear-gradient(to right, var(--range-fill) ${record.eldering}%, var(--range-track) ${record.eldering}%)`,
+                  }}
+                />
+                {ticksRemaining !== null && (
+                  <p className="mt-1 text-center text-[11px] text-slate-500 dark:text-slate-400">
+                    {ticksRemaining <= 0
+                      ? "Fully eldered"
+                      : `Estimated ${ticksRemaining} tick${ticksRemaining === 1 ? "" : "s"} until elder`}
+                  </p>
+                )}
+              </>
             ) : (
               <p className="rounded border border-dashed border-slate-300 px-2 py-1.5 text-center text-xs text-slate-500 dark:border-slate-700/60">
                 Eldering not applicable

@@ -8,6 +8,21 @@ export interface ChangelogEntry {
 // fix ships — it renders automatically in the Footer.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: "1.3.0",
+    date: "2026-08-03",
+    changes: [
+      "Estimated ticks until elder now shows underneath the eldering slider, based on each species' average tick pace",
+    ],
+  },
+  {
+    version: "1.2.0",
+    date: "2026-08-03",
+    changes: [
+      "Deleting an account now asks for confirmation first, so a stray click on the × can't wipe it out",
+      "Removed the \"Owned\" checkbox and stat — everyone owns every dragon, so it was just an extra click",
+    ],
+  },
+  {
     version: "1.1.0",
     date: "2026-07-02",
     changes: [
