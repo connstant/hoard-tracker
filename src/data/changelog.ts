@@ -8,6 +8,13 @@ export interface ChangelogEntry {
 // fix ships — it renders automatically in the Footer.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: "1.3.1",
+    date: "2026-08-03",
+    changes: [
+      "Fixed the crystal legend's spacing on mobile, where it was stretching entries out with an awkward gap in the middle",
+    ],
+  },
+  {
     version: "1.3.0",
     date: "2026-08-03",
     changes: [
