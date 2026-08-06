@@ -4,6 +4,7 @@ import CrystalLegend from "./components/CrystalLegend";
 import AccountTabs from "./components/AccountTabs";
 import StatsBar from "./components/StatsBar";
 import DragonGrid from "./components/DragonGrid";
+import ShareModal from "./components/ShareModal";
 import Footer from "./components/Footer";
 import { SPECIES } from "./data/species";
 import type { AppState, DragonRecord } from "./types";
@@ -19,6 +20,7 @@ import { applyTheme, loadTheme, saveTheme, type Theme } from "./lib/theme";
 export default function App() {
   const [state, setState] = useState<AppState>(() => loadState());
   const [theme, setTheme] = useState<Theme>(() => loadTheme());
+  const [shareOpen, setShareOpen] = useState(false);
 
   useEffect(() => {
     saveState(state);
@@ -111,6 +113,7 @@ export default function App() {
           onToggleTheme={() =>
             setTheme((prev) => (prev === "dark" ? "light" : "dark"))
           }
+          onShare={() => setShareOpen(true)}
           onExport={() => exportState(state)}
           onImport={handleImport}
         />
@@ -131,6 +134,9 @@ export default function App() {
         <DragonGrid dragons={activeAccount.dragons} onChange={handleDragonChange} />
         <Footer />
       </div>
+      {shareOpen && (
+        <ShareModal account={activeAccount} onClose={() => setShareOpen(false)} />
+      )}
     </div>
   );
 }

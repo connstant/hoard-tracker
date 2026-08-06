@@ -4,6 +4,7 @@ import type { Theme } from "../lib/theme";
 interface HeaderProps {
   theme: Theme;
   onToggleTheme: () => void;
+  onShare: () => void;
   onExport: () => void;
   onImport: (file: File) => void;
 }
@@ -11,6 +12,7 @@ interface HeaderProps {
 export default function Header({
   theme,
   onToggleTheme,
+  onShare,
   onExport,
   onImport,
 }: HeaderProps) {
@@ -51,6 +53,12 @@ export default function Header({
           className="rounded-lg border border-slate-300 bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-200 dark:border-slate-700/60 dark:bg-slate-800/50 dark:text-slate-200 dark:hover:bg-slate-700/60"
         >
           Import
+        </button>
+        <button
+          onClick={onShare}
+          className="rounded-lg border border-slate-300 bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-200 dark:border-slate-700/60 dark:bg-slate-800/50 dark:text-slate-200 dark:hover:bg-slate-700/60"
+        >
+          Share
         </button>
         <button
           onClick={onExport}
