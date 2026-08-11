@@ -21,26 +21,26 @@ export default function FamilyTree({
         <div className="grid w-full grid-cols-2 gap-3">
           <Side label="Paternal">
             <TreeNode
-              label="Grandmother"
-              value={record.paternalGrandmother}
-              onChange={(v) => onChange({ paternalGrandmother: v })}
-            />
-            <TreeNode
               label="Grandfather"
               value={record.paternalGrandfather}
               onChange={(v) => onChange({ paternalGrandfather: v })}
             />
-          </Side>
-          <Side label="Maternal">
             <TreeNode
               label="Grandmother"
-              value={record.maternalGrandmother}
-              onChange={(v) => onChange({ maternalGrandmother: v })}
+              value={record.paternalGrandmother}
+              onChange={(v) => onChange({ paternalGrandmother: v })}
             />
+          </Side>
+          <Side label="Maternal">
             <TreeNode
               label="Grandfather"
               value={record.maternalGrandfather}
               onChange={(v) => onChange({ maternalGrandfather: v })}
+            />
+            <TreeNode
+              label="Grandmother"
+              value={record.maternalGrandmother}
+              onChange={(v) => onChange({ maternalGrandmother: v })}
             />
           </Side>
         </div>
