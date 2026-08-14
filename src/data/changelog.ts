@@ -8,6 +8,14 @@ export interface ChangelogEntry {
 // fix ships — it renders automatically in the Footer.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: "1.4.0",
+    date: "2026-08-14",
+    changes: [
+      "\"Add Tick\" button on each eldering species bumps progress by that species' exact average per-tick gain, so you don't have to type in the new value every time",
+      "Small ▲▼ arrows next to the eldering percent fine-tune it by 0.1% at a time",
+    ],
+  },
+  {
     version: "1.3.1",
     date: "2026-08-03",
     changes: [

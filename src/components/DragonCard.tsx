@@ -38,6 +38,24 @@ export default function DragonCard({
     ? Math.ceil((species.ticksToElder * (100 - record.eldering)) / 100)
     : null;
 
+  // The exact gain per tick (e.g. Brood Watcher is 100/181 = 0.5525%, not a
+  // rounded 0.5-0.6 range). Kept at full precision internally; only the
+  // display is rounded to 1 decimal.
+  const tickAmount = species.ticksToElder ? 100 / species.ticksToElder : null;
+
+  const setEldering = (value: number) => {
+    onChange({ eldering: clamp(round(value, 3), 0, 100) });
+  };
+
+  const handleTick = () => {
+    if (tickAmount === null) return;
+    setEldering(record.eldering + tickAmount);
+  };
+
+  const handleNudge = (delta: number) => {
+    setEldering(record.eldering + delta);
+  };
+
   // While the user is typing, the input shows its own raw text so a leading
   // "0" can be stripped as soon as another digit follows it instead of
   // fighting the number input's value-vs-display quirks. Once the field
@@ -117,7 +135,7 @@ export default function DragonCard({
                   <input
                     type="text"
                     inputMode="decimal"
-                    value={eldFocused ? eldText : String(record.eldering)}
+                    value={eldFocused ? eldText : record.eldering.toFixed(1)}
                     onFocus={() => {
                       setEldFocused(true);
                       setEldText(String(record.eldering));
@@ -133,9 +151,27 @@ export default function DragonCard({
                       }
                     }}
                     onBlur={() => setEldFocused(false)}
-                    className="w-20 rounded border border-slate-300 bg-white px-1.5 py-0.5 text-right text-xs text-slate-900 outline-none dark:border-slate-700/60 dark:bg-slate-950/60 dark:text-white"
+                    className="w-16 rounded border border-slate-300 bg-white px-1.5 py-0.5 text-right text-xs text-slate-900 outline-none dark:border-slate-700/60 dark:bg-slate-950/60 dark:text-white"
                   />
                   %
+                  <div className="flex flex-col leading-[9px]">
+                    <button
+                      type="button"
+                      aria-label="Increase eldering by 0.1%"
+                      onClick={() => handleNudge(0.1)}
+                      className="text-[9px] text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+                    >
+                      ▲
+                    </button>
+                    <button
+                      type="button"
+                      aria-label="Decrease eldering by 0.1%"
+                      onClick={() => handleNudge(-0.1)}
+                      className="text-[9px] text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+                    >
+                      ▼
+                    </button>
+                  </div>
                 </span>
               )}
             </div>
@@ -152,13 +188,26 @@ export default function DragonCard({
                     background: `linear-gradient(to right, var(--range-fill) ${record.eldering}%, var(--range-track) ${record.eldering}%)`,
                   }}
                 />
-                {ticksRemaining !== null && (
-                  <p className="mt-1 text-center text-[11px] text-slate-500 dark:text-slate-400">
-                    {ticksRemaining <= 0
-                      ? "Fully eldered"
-                      : `Estimated ${ticksRemaining} tick${ticksRemaining === 1 ? "" : "s"} until elder`}
-                  </p>
-                )}
+                <div className="mt-1.5 flex items-center justify-between gap-2">
+                  {ticksRemaining !== null && (
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                      {ticksRemaining <= 0
+                        ? "Fully eldered"
+                        : `Estimated ${ticksRemaining} tick${ticksRemaining === 1 ? "" : "s"} until elder`}
+                    </p>
+                  )}
+                  {tickAmount !== null && (
+                    <button
+                      type="button"
+                      onClick={handleTick}
+                      disabled={record.eldering >= 100}
+                      title={`+${tickAmount.toFixed(3)}% per tick`}
+                      className="shrink-0 rounded-lg border border-slate-300 bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-700 transition hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700/60 dark:bg-slate-800/50 dark:text-slate-200 dark:hover:bg-slate-700/60"
+                    >
+                      Add Tick
+                    </button>
+                  )}
+                </div>
               </>
             ) : (
               <p className="rounded border border-dashed border-slate-300 px-2 py-1.5 text-center text-xs text-slate-500 dark:border-slate-700/60">
@@ -197,6 +246,11 @@ export default function DragonCard({
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
+}
+
+function round(value: number, decimals: number) {
+  const factor = 10 ** decimals;
+  return Math.round(value * factor) / factor;
 }
 
 function Segmented<T extends string>({
