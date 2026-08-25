@@ -8,6 +8,13 @@ export interface ChangelogEntry {
 // fix ships — it renders automatically in the Footer.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: "1.5.0",
+    date: "2026-08-25",
+    changes: [
+      "Added the Elder Crystal Atlas: a new page (via the header's \"Crystal Atlas\" button) charting all 49 Elder Crystal locations, with a searchable, pinnable live map and a fully pre-labeled reference map",
+    ],
+  },
+  {
     version: "1.4.0",
     date: "2026-08-14",
     changes: [

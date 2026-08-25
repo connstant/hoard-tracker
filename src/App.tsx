@@ -6,6 +6,7 @@ import StatsBar from "./components/StatsBar";
 import DragonGrid from "./components/DragonGrid";
 import ShareModal from "./components/ShareModal";
 import Footer from "./components/Footer";
+import CrystalAtlas from "./components/CrystalAtlas";
 import { SPECIES } from "./data/species";
 import type { AppState, DragonRecord } from "./types";
 import {
@@ -21,6 +22,7 @@ export default function App() {
   const [state, setState] = useState<AppState>(() => loadState());
   const [theme, setTheme] = useState<Theme>(() => loadTheme());
   const [shareOpen, setShareOpen] = useState(false);
+  const [view, setView] = useState<"hoard" | "atlas">("hoard");
 
   useEffect(() => {
     saveState(state);
@@ -105,6 +107,10 @@ export default function App() {
     return { fullyEldered, pure, ultra };
   }, [activeAccount]);
 
+  if (view === "atlas") {
+    return <CrystalAtlas onBack={() => setView("hoard")} />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 px-4 py-6 transition-colors sm:px-6 lg:px-8 dark:bg-slate-950">
       <div className="mx-auto flex max-w-[1600px] flex-col gap-4">
@@ -116,6 +122,7 @@ export default function App() {
           onShare={() => setShareOpen(true)}
           onExport={() => exportState(state)}
           onImport={handleImport}
+          onOpenAtlas={() => setView("atlas")}
         />
         <CrystalLegend />
         <AccountTabs

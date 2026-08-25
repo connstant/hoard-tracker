@@ -7,6 +7,7 @@ interface HeaderProps {
   onShare: () => void;
   onExport: () => void;
   onImport: (file: File) => void;
+  onOpenAtlas: () => void;
 }
 
 export default function Header({
@@ -15,6 +16,7 @@ export default function Header({
   onShare,
   onExport,
   onImport,
+  onOpenAtlas,
 }: HeaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -40,6 +42,12 @@ export default function Header({
             e.target.value = "";
           }}
         />
+        <button
+          onClick={onOpenAtlas}
+          className="rounded-lg border border-slate-300 bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-200 dark:border-slate-700/60 dark:bg-slate-800/50 dark:text-slate-200 dark:hover:bg-slate-700/60"
+        >
+          Crystal Atlas
+        </button>
         <button
           onClick={onToggleTheme}
           aria-label="Toggle light mode"
